@@ -1,0 +1,10 @@
+'use strict';
+const SUITS=['S','H','D','C'];
+const SYMBOL={S:'♠',H:'♥',D:'♦',C:'♣',N:'NT'};
+const SUITNAME={S:'Spades',H:'Hearts',D:'Diamonds',C:'Clubs',N:'No trump'};
+const rank=c=>c%13+2;
+const suit=c=>SUITS[Math.floor(c/13)];
+const label=c=>({11:'Jack',12:'Queen',13:'King',14:'Ace'}[rank(c)]||rank(c))+' of '+SUITNAME[suit(c)];
+let hintCard=null;
+function landscapeHTML(r){const scenes={13:'<circle cx="36" cy="15" r="5" fill="#fff9ed" opacity=".7"/><path d="M0 54 18 22 32 42 43 30 60 57V80H0Z" fill="#fff9ed" opacity=".75"/><path d="m18 22-6 11 6-3 6 3Z" fill="#fff9ed"/><path d="M0 68 23 45 44 66 60 53V80H0Z" fill="#fff9ed" opacity=".3"/>',12:'<path d="M38 8a10 10 0 1 0 8 16A10 10 0 0 1 38 8Z" fill="#fff9ed"/><path d="M0 44Q12 27 26 40T60 38V54H0Z" fill="#fff9ed" opacity=".45"/><path d="M0 52h60M10 59h40M19 65h23" stroke="#fff9ed" stroke-width="1.5" opacity=".65"/>',11:'<circle cx="43" cy="14" r="5" fill="#fff9ed" opacity=".7"/><path d="m17 18-12 27h8L3 58h28L21 45h8ZM42 29 33 48h6l-8 13h24l-8-13h6Z" fill="#fff9ed" opacity=".75"/><path d="M17 52v14M42 54v12M0 67q30-7 60 0" stroke="#fff9ed" stroke-width="2" opacity=".65"/>'};return '<span class="landscape" aria-hidden="true"><svg viewBox="0 0 60 80">'+scenes[r]+'</svg><span class="landscape-title">'+({13:'SUMMIT',12:'MOON',11:'FOREST'}[r])+'</span></span>';}
+function cardHTML(c,button=false,disabled=false){const red=['H','D'].includes(suit(c)),r=rank(c),face=({11:'J',12:'Q',13:'K',14:'A'}[r]||r);return '<'+(button?'button':'div')+' class="card'+(red?' red':'')+(button&&!disabled?' available':'')+(c===hintCard&&button?' suggested':'')+'"'+(button?' data-card="'+c+'" aria-label="'+label(c)+(disabled?', not playable':'')+'"'+(disabled?' disabled':''):' role="img" aria-label="'+label(c)+'"')+'><span class="corner">'+face+'<small>'+SYMBOL[suit(c)]+'</small></span>'+(r>=11&&r<14?landscapeHTML(r):'<span class="suit-big">'+SYMBOL[suit(c)]+'</span>')+'<span class="corner bottom">'+face+'<small>'+SYMBOL[suit(c)]+'</small></span></'+(button?'button':'div')+'>';}

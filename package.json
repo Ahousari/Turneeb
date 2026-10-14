@@ -1,0 +1,13 @@
+{
+  "name": "tarneeb-friends",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Private multiplayer Tarneeb with human and computer players",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "check": "node --check server.js && node --check public/app.js && node --check lib/rooms.js && node --check lib/engine.js"
+  },
+  "dependencies": { "ws": "^8.18.3" }
+}

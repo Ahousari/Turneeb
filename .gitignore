@@ -1,0 +1,8 @@
+node_modules/
+.tools/
+.npm-cache/
+data/
+.env
+*.log
+test-results/
+Tarneeb-Render.zip
